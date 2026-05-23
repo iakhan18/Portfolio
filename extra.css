@@ -1,0 +1,67 @@
+/* extra.css – supplemental styling for Inthiyaz Ahmad portfolio */
+/* NOTE: Uses the same CSS tokens defined in styles.css:
+   --bg, --bg-card, --text, --text-2, --border, --accent, --accent-soft,
+   --font, --r, --ease-out, --t-fast, --t-med, --t-slow               */
+
+/* ---------------------------------------------------------------
+   Nav scrolled state
+   --------------------------------------------------------------- */
+.nav.scrolled .nav-inner {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.92);
+}
+
+/* ---------------------------------------------------------------
+   [data-reveal] fade-in observer (used by initFadeInObserver)
+   Defined here as a supplement; base definition in styles.css
+   --------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------
+   Modal case study content styles
+   --------------------------------------------------------------- */
+.mb-content h3 {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  letter-spacing: -0.3px;
+  font-family: 'Instrument Serif', serif;
+}
+.mb-content h3:first-child { margin-top: 0; }
+.mb-content p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-bottom: 12px;
+}
+.mb-content strong { color: var(--text); }
+
+/* ---------------------------------------------------------------
+   Rotating Sticker Badge (supplement to .sticker in styles.css)
+   --------------------------------------------------------------- */
+.rotating-sticker {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  animation: rotateSlow 30s linear infinite;
+}
+
+/* ---------------------------------------------------------------
+   Drafting Cross Motifs (+)
+   --------------------------------------------------------------- */
+.drafting-cross {
+  position: absolute;
+  font-size: 22px;
+  color: var(--text-2);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.top-left     { top: -12px;    left: -12px; }
+.bottom-right { bottom: -12px; right: -12px; }
+.top-right    { top: -12px;    right: -12px; }
+.bottom-left  { bottom: -12px; left: -12px; }

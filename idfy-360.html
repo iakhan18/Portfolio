@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDfy 360 — Document Verification Case Study</title>
+  <meta name="description" content="A detailed, story-led case study for the IDfy 360 Aadhaar and DigiLocker document verification flow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="extra.css">
+</head>
+<body class="case-page">
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+  </div>
+
+  <div class="bg-grid" id="bgGrid"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <header class="case-nav">
+    <a href="index.html#work" class="case-back">← Back to Work</a>
+    <a href="index.html" class="case-brand">Inthiyaz Ahmad</a>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="case-kicker">IDfy · Identity Verification · Product Design</div>
+      <h1>Making document verification feel less like paperwork, and more like a guided conversation.</h1>
+      <p class="case-lede">IDfy 360 explores a compact Aadhaar verification flow where users choose a document, understand why DigiLocker is recommended, and start verification without feeling pushed into a black box.</p>
+      <div class="case-meta-grid">
+        <div><span>Product</span><strong>IDfy 360</strong></div>
+        <div><span>Flow</span><strong>Document Verification</strong></div>
+        <div><span>Role</span><strong>Product Designer</strong></div>
+        <div><span>Tools</span><strong>Figma, UX flows, UI systems</strong></div>
+      </div>
+    </section>
+
+    <section class="case-showcase">
+      <div class="phone-stage">
+        <img src="assets/idfy-360-document-verification.png" alt="IDfy 360 document verification UI">
+      </div>
+      <div class="quick-card">
+        <span class="case-eyebrow">Got 30 seconds?</span>
+        <h2>Here is the whole thing.</h2>
+        <p>Aadhaar verification is a trust-heavy moment. The interface has to make the user feel oriented, tell them what is happening, and recommend the safest path without overwhelming them.</p>
+        <p>So the design turns the flow into three visible steps: choose the document, choose the method, then start verification.</p>
+        <div class="chip-row">
+          <span>Aadhaar Card</span>
+          <span>DigiLocker</span>
+          <span>Face Auth</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="story-number">01</div>
+      <div class="story-copy">
+        <span class="case-eyebrow">Let’s Set The Context</span>
+        <h2>Verification usually starts with a little anxiety.</h2>
+        <p>Picture a user trying to complete onboarding for a financial, hiring, lending, or enterprise workflow. They are not thinking about APIs, OCR, KYC, or risk engines. They are thinking, “Will this work? Is this safe? How long will it take?”</p>
+        <p>That moment needs clarity. A vague verification screen can make users hesitate. A guided one can make the same process feel calm, predictable, and trustworthy.</p>
+      </div>
+      <div class="sketch-board">
+        <div class="sketch-node">User</div>
+        <div class="sketch-line"></div>
+        <div class="sketch-node">Document</div>
+        <div class="sketch-line"></div>
+        <div class="sketch-node">Method</div>
+        <div class="sketch-line"></div>
+        <div class="sketch-node">Verify</div>
+      </div>
+    </section>
+
+    <section class="story-section reverse">
+      <div class="story-number">02</div>
+      <div class="story-copy">
+        <span class="case-eyebrow">The Problem Scenario</span>
+        <h2>The user has choices, but choices can become friction.</h2>
+        <p>The selected Figma frame starts with a simple decision: choose your document type. Aadhaar Card is visible inside a dropdown, which keeps the first step familiar and compact.</p>
+        <p>Then comes the bigger decision: how should the user verify? DigiLocker is recommended because it can securely fetch Aadhaar details without manual entry. Face Authentication remains available, but visually secondary.</p>
+      </div>
+      <div class="scenario-list">
+        <div>
+          <strong>Old mental model</strong>
+          <span>“Upload something, wait, and hope it passes.”</span>
+        </div>
+        <div>
+          <strong>Better mental model</strong>
+          <span>“Pick Aadhaar, use the recommended secure route, and continue.”</span>
+        </div>
+        <div>
+          <strong>Design job</strong>
+          <span>Reduce uncertainty before the user clicks Start Verification.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem-statement">
+      <span class="case-eyebrow">Problem Statement</span>
+      <h2>How might we make identity verification feel guided, secure, and easy to complete without hiding important decisions?</h2>
+    </section>
+
+    <section class="story-section">
+      <div class="story-number">03</div>
+      <div class="story-copy">
+        <span class="case-eyebrow">Project Goals</span>
+        <h2>Three goals shaped the flow.</h2>
+        <p>The screen is intentionally compact. It does not try to teach the entire verification ecosystem. It gives just enough structure for the user to move forward with confidence.</p>
+      </div>
+      <div class="goal-grid">
+        <div><strong>01</strong><h3>Make the next step obvious</h3><p>Numbered sections help users know where they are in the flow.</p></div>
+        <div><strong>02</strong><h3>Recommend without forcing</h3><p>DigiLocker gets a stronger visual treatment, but Face Authentication remains available.</p></div>
+        <div><strong>03</strong><h3>Keep trust visible</h3><p>Helper copy explains that Aadhaar details are fetched securely with no manual entry.</p></div>
+      </div>
+    </section>
+
+    <section class="visual-breakdown">
+      <span class="case-eyebrow">UI Breakdown</span>
+      <h2>The card behaves like a tiny checklist.</h2>
+      <div class="breakdown-grid">
+        <article>
+          <span>Header</span>
+          <h3>Document Verification</h3>
+          <p>The blue icon and soft blue header create a clear starting point without making the screen feel heavy.</p>
+        </article>
+        <article>
+          <span>Step 1</span>
+          <h3>Choose document type</h3>
+          <p>Aadhaar Card is shown inside a bordered dropdown, making the selected state explicit and editable.</p>
+        </article>
+        <article>
+          <span>Step 2</span>
+          <h3>Choose method</h3>
+          <p>The DigiLocker card opens by default, with an active blue border and “Recommended” badge.</p>
+        </article>
+        <article>
+          <span>Footer</span>
+          <h3>Completion state</h3>
+          <p>“Complete all steps to continue” keeps the task status visible and avoids premature completion.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="wire-copy">
+        <span class="case-eyebrow">Sketching The Logic</span>
+        <h2>Before polish, the flow is just a hierarchy problem.</h2>
+        <p>The screen needs to answer four questions in order: what am I doing, what document is selected, what method should I use, and what happens next?</p>
+      </div>
+      <div class="wireframes">
+        <div class="wire-card">
+          <div></div><span></span><span></span><span></span>
+        </div>
+        <div class="wire-card tall">
+          <div></div><span></span><span></span><button></button>
+        </div>
+        <div class="wire-card">
+          <div></div><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-section">
+      <div>
+        <span class="case-eyebrow">Final Frame</span>
+        <h2>A compact, friendly verification card.</h2>
+        <p>The final UI uses calm spacing, familiar dropdown and card patterns, and a strong primary CTA. The result feels closer to being guided by a product than being processed by a system.</p>
+      </div>
+      <img src="assets/idfy-360-document-verification.png" alt="Final IDfy 360 document verification design">
+    </section>
+
+    <section class="reflection">
+      <span class="case-eyebrow">Reflection</span>
+      <h2>Small flows carry a lot of trust.</h2>
+      <p>Identity verification is rarely the user’s goal. It is the gate they need to pass through to get to the product. A good verification flow respects that: it is clear, short, secure-feeling, and emotionally lightweight.</p>
+      <a href="index.html#work" class="btn btn-dark">Back to Work</a>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
