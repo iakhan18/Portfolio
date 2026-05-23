@@ -143,8 +143,8 @@ h1, h2, h3, h4, h5, h6,
   max-width: var(--max); margin: 0 auto;
   padding: 140px 32px 80px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center; gap: 60px;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center; gap: 48px;
   position: relative;
 }
 .hero-inner { display: flex; flex-direction: column; gap: 0; }
@@ -229,9 +229,8 @@ h1, h2, h3, h4, h5, h6,
 /* ── Hero Visual ────────────────────────────────────────────── */
 .hero-visual {
   position: relative; width: 100%;
-  aspect-ratio: 1; max-width: 360px;
+  aspect-ratio: 3/4; max-width: 340px;
   margin: 0 auto;
-  display: flex; align-items: center; justify-content: center;
   animation: fadeUp 0.6s 0.25s var(--ease-out) both;
 }
 .hero-ring {
