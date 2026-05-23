@@ -33,6 +33,13 @@ export function initPortfolio() {
   initFadeInObserver(); // Sets revealObserver
   initCaseStudies(); // Sets escapeHandler
   initToTopButton();
+  initPageLoader();
+  initScrollProgress();
+  initCounterAnimation();
+  initCardTilt();
+  initParallax();
+  initSplitTextReveal();
+  initSmoothHoverScale();
 
   return cleanup;
 }
@@ -480,4 +487,199 @@ function initCaseStudies() {
     }
   };
   window.addEventListener('keydown', escapeHandler);
+}
+
+/* --------------------------------------------------------------------------
+   10. PAGE LOADER — CURTAIN REVEAL
+   -------------------------------------------------------------------------- */
+function initPageLoader() {
+  const existing = document.querySelector('.page-loader');
+  if (existing) return;
+
+  const loader = document.createElement('div');
+  loader.className = 'page-loader';
+  loader.innerHTML = '<span class="loader-text">IA</span>';
+  document.body.appendChild(loader);
+
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  progress.style.width = '100%';
+  document.body.appendChild(progress);
+
+  setTimeout(() => loader.classList.add('loaded'), 800);
+  setTimeout(() => loader.remove(), 1400);
+}
+
+/* --------------------------------------------------------------------------
+   11. SCROLL PROGRESS BAR
+   -------------------------------------------------------------------------- */
+function initScrollProgress() {
+  const bar = document.querySelector('.scroll-progress');
+  if (!bar) return;
+
+  const update = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+    bar.style.transform = `scaleX(${progress})`;
+  };
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+/* --------------------------------------------------------------------------
+   12. COUNTER ANIMATION (STATS COUNT UP ON SCROLL)
+   -------------------------------------------------------------------------- */
+function initCounterAnimation() {
+  const stats = document.querySelectorAll('.stat-n');
+  if (!stats.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const text = el.textContent.trim();
+        const match = text.match(/^(\d+)(\D*)$/);
+        if (!match) return;
+
+        const target = parseInt(match[1], 10);
+        const suffix = match[2];
+        const duration = 1500;
+        const start = performance.now();
+
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const current = Math.round(target * eased);
+          el.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        el.textContent = '0' + suffix;
+        requestAnimationFrame(tick);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  stats.forEach(s => observer.observe(s));
+}
+
+/* --------------------------------------------------------------------------
+   13. 3D CARD TILT ON HOVER
+   -------------------------------------------------------------------------- */
+function initCardTilt() {
+  const cards = document.querySelectorAll('.project-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01,1.01,1.01)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   14. PARALLAX SCROLL EFFECTS
+   -------------------------------------------------------------------------- */
+function initParallax() {
+  const hero = document.querySelector('.hero');
+  const heroVisual = document.querySelector('.hero-visual');
+  const heroInner = document.querySelector('.hero-inner');
+  const sticker = document.querySelector('.rotating-sticker') || document.querySelector('.sticker');
+
+  if (!hero) return;
+
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const heroH = hero.offsetHeight;
+
+        if (scrollY < heroH) {
+          const ratio = scrollY / heroH;
+
+          if (heroVisual) {
+            heroVisual.style.transform = `translateY(${scrollY * 0.15}px)`;
+          }
+          if (heroInner) {
+            heroInner.style.transform = `translateY(${scrollY * 0.08}px)`;
+            heroInner.style.opacity = 1 - ratio * 0.6;
+          }
+          if (sticker) {
+            sticker.style.transform = `rotate(${scrollY * 0.15}deg)`;
+          }
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   15. SPLIT TEXT REVEAL (CONTACT TITLE)
+   -------------------------------------------------------------------------- */
+function initSplitTextReveal() {
+  const title = document.querySelector('.contact-title');
+  if (!title || title.dataset.split) return;
+  title.dataset.split = 'true';
+
+  const html = title.innerHTML;
+  const words = html.split(/(\s+|<[^>]+>)/g);
+
+  title.innerHTML = words.map(word => {
+    if (word.match(/^</) || word.match(/^\s+$/)) return word;
+    return `<span class="word-reveal">${word}</span>`;
+  }).join(' ');
+
+  const wordEls = title.querySelectorAll('.word-reveal');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        wordEls.forEach((w, i) => {
+          setTimeout(() => w.classList.add('visible'), i * 80);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(title);
+}
+
+/* --------------------------------------------------------------------------
+   16. SMOOTH HOVER SCALE ON INTERACTIVE ELEMENTS
+   -------------------------------------------------------------------------- */
+function initSmoothHoverScale() {
+  const btns = document.querySelectorAll('.btn, .nl-btn, .pc-cta, .contact-email');
+  btns.forEach(btn => {
+    btn.style.transition = btn.style.transition
+      ? btn.style.transition + ', transform 0.3s cubic-bezier(.2,1,.2,1)'
+      : 'transform 0.3s cubic-bezier(.2,1,.2,1)';
+
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transform = 'scale(1.05)';
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'scale(1)';
+    });
+  });
 }

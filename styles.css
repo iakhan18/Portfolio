@@ -663,6 +663,177 @@ h1, h2, h3, h4, h5, h6,
   to   { transform: rotate(360deg); }
 }
 
+/* Floating animations for hero chips */
+@keyframes floatA {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-10px) rotate(3deg); }
+}
+
+/* Page load curtain */
+.page-loader {
+  position: fixed; inset: 0; z-index: 10000;
+  background: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.6s var(--ease-fluid), visibility 0.6s;
+}
+.page-loader.loaded {
+  opacity: 0; visibility: hidden; pointer-events: none;
+}
+.loader-text {
+  font-family: var(--font-title); font-size: clamp(28px, 5vw, 56px);
+  color: white; letter-spacing: -2px; font-weight: 800;
+  animation: loaderPulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes loaderPulse {
+  from { opacity: 0.4; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Animated gradient on hero title accent */
+.hero-em {
+  background-size: 200% 200% !important;
+  animation: gradientShift 4s ease-in-out infinite !important;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Split word reveal animation */
+.word-reveal {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px) rotateX(40deg);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.word-reveal.visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+}
+
+/* 3D card tilt */
+.project-card {
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease-out);
+}
+
+/* Marquee speed on hover */
+.marquee-wrap:hover .marquee-track {
+  animation-duration: 8s;
+}
+
+/* Enhanced project visual hover */
+.project-card:hover .pc-visual {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  transform: translateY(-8px) scale(1.01);
+}
+.project-card:hover .project-mockup {
+  transform: scale(1.05);
+  transition: transform 0.6s var(--ease-out);
+}
+
+/* Staggered card entry */
+.project-card[data-reveal] { transition-delay: 0s; }
+.project-card[data-reveal]:nth-child(1) { transition-delay: 0s; }
+.project-card[data-reveal]:nth-child(2) { transition-delay: 0.15s; }
+.project-card[data-reveal]:nth-child(3) { transition-delay: 0.3s; }
+.project-card[data-reveal]:nth-child(4) { transition-delay: 0.45s; }
+
+/* Bento card stagger */
+.bcard[data-reveal]:nth-child(1) { transition-delay: 0s; }
+.bcard[data-reveal]:nth-child(2) { transition-delay: 0.1s; }
+.bcard[data-reveal]:nth-child(3) { transition-delay: 0.15s; }
+.bcard[data-reveal]:nth-child(4) { transition-delay: 0.2s; }
+.bcard[data-reveal]:nth-child(5) { transition-delay: 0.25s; }
+.bcard[data-reveal]:nth-child(6) { transition-delay: 0.3s; }
+
+/* Counter animation */
+.stat-n {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Smooth scroll progress bar */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 10001;
+  background: linear-gradient(90deg, var(--accent), #818cf8, #c084fc);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.1s linear;
+}
+
+/* Nav hover glow */
+.nav-inner::before {
+  content: '';
+  position: absolute; inset: -1px; border-radius: 40px;
+  background: linear-gradient(135deg, rgba(79,70,229,0.15), rgba(129,140,248,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  z-index: -1;
+}
+.nav-inner:hover::before { opacity: 1; }
+
+/* Subtle noise texture overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.4;
+}
+
+/* Glow pulse on portrait */
+.hero-visual::after {
+  content: '';
+  position: absolute; inset: -20px; border-radius: 32px;
+  background: radial-gradient(circle, rgba(79,70,229,0.08) 0%, transparent 70%);
+  animation: glowPulse 3s ease-in-out infinite;
+  z-index: -1;
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.05); }
+}
+
+/* Section title underline animation */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 0; height: 3px; margin-top: 12px;
+  background: linear-gradient(90deg, var(--accent), #818cf8);
+  border-radius: 2px;
+  transition: width 0.8s var(--ease-fluid);
+}
+.section-title.revealed::after,
+.section-head.revealed .section-title::after { width: 60px; }
+
+/* Modal entrance */
+.modal-panel {
+  transform: translateY(40px) scale(0.92);
+}
+.modal.open .modal-panel {
+  transform: translateY(0) scale(1);
+  transition: transform 0.5s var(--ease-fluid);
+}
+
+/* Contact title shimmer */
+.contact-title em {
+  background: linear-gradient(90deg, var(--text), var(--accent), #818cf8, var(--text));
+  background-size: 300% 100%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
+}
+
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hero {
